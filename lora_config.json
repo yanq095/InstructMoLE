@@ -1,0 +1,21 @@
+{
+    "lora_config": {
+      "r": 256,
+      "lora_alpha": 256,
+      "init_lora_weights": "gaussian",
+      "target_modules": [
+        "x_embedder",
+        "attn.to_q",
+        "attn.to_k",
+        "attn.to_v",
+        "attn.to_out.0",
+        "norm1.linear",
+        "norm.linear",
+        "ff.net.0.proj",
+        "ff.net.2",
+        "single_transformer_blocks.*.proj_out",
+        "single_transformer_blocks.*.proj_mlp" 
+      ]
+    }
+  }
+  

@@ -1,0 +1,2433 @@
+
+[
+    {
+        "index": 0,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a polar bear standing on iceberg",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/13_polar bear.jpg",
+                        "caption": "a polar bear"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "polar bear",
+                        "polar bear"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 1,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a sea turtle swimming in the sea.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/18_sea turtle.jpg",
+                        "caption": "a sea turtle"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "sea turtle",
+                        "sea turtle"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 2,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a raccoon standing in a forest\n",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/08_raccoon.jpg",
+                        "caption": "a raccoon"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "raccoon",
+                        "raccoon"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 3,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a dog wearing a red collar running",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/12_dog.jpg",
+                        "caption": "a dog"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "dog",
+                        "dog"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 4,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a sphynx cat sitting on a sofa",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/25_Sphynx cat.jpg",
+                        "caption": "a sphynx cat"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "sphynx cat",
+                        "sphynx cat"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 5,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a colorful butterfly flying in the garden",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/15_butterfly.jpg",
+                        "caption": "a butterfly"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "butterfly",
+                        "butterfly"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 6,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a grasshopper jumping on the grass",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/29_grasshopper.jpg",
+                        "caption": "a grasshopper"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "grasshopper",
+                        "grasshopper"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 7,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a deer standing in a forest",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/31_deer.jpg",
+                        "caption": "a deer"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "deer",
+                        "deer"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 8,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a dolphin jumping out of the water",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/39_dolphin.jpg",
+                        "caption": "a dolphin"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "dolphin",
+                        "dolphin"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 9,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute kitten wearing a bowtie",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/02_kitten.jpg",
+                        "caption": "a kitten"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "kitten",
+                        "kitten"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 10,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "an elephant standing in the savannah",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/38_elephant.jpg",
+                        "caption": "an elephant"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "elephant",
+                        "elephant"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 11,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a shark swimming in the blue sea",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/06_shark.jpg",
+                        "caption": "a shark"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "shark",
+                        "shark"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 12,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "an eagle flying in the blue sky",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/14_eagle.jpg",
+                        "caption": "an eagle"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "eagle",
+                        "eagle"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 13,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a panda sitting on a bamboo mat",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/33_panda.jpg",
+                        "caption": "a panda"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "panda",
+                        "panda"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 14,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a rooster standing on a wooden fence",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/09_rooster.jpg",
+                        "caption": "a rooster"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "rooster",
+                        "rooster"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 15,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute kitten sitting on a mat.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/00_kitten.jpg",
+                        "caption": "a kitten"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "kitten",
+                        "kitten"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 16,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a lizard on a rocky background",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/36_lizard.jpg",
+                        "caption": "a lizard"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "lizard",
+                        "lizard"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 17,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a penguin standing on an iceberg",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/05_penguin.jpg",
+                        "caption": "a penguin"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "penguin",
+                        "penguin"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 18,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a white tiger standing in the grass.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/40_white tiger.jpg",
+                        "caption": "a white tiger"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "white tiger",
+                        "white tiger"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 19,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a french bulldog in a cozy sweater",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/43_French bulldog.jpg",
+                        "caption": "a french bulldog"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "french bulldog",
+                        "french bulldog"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 20,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute hamster wearing a tiny hat",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/20_hamster.jpg",
+                        "caption": "a hamster"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "hamster",
+                        "hamster"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 21,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a crab walking on the sandy beach",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/04_crab.jpg",
+                        "caption": "a crab"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "crab",
+                        "crab"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 22,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a stork standing on a grassy field",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/01_stork.jpg",
+                        "caption": "a stork"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "stork",
+                        "stork"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 23,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a wolf howling in the forest\n",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/27_wolf.jpg",
+                        "caption": "a wolf"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "wolf",
+                        "wolf"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 24,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a sly fox in a forest setting",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/10_fox.jpg",
+                        "caption": "a fox"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "fox",
+                        "fox"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 25,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute puppy in a red bow\n",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/42_puppy.jpg",
+                        "caption": "a puppy"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "puppy",
+                        "puppy"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 26,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute cat sitting on a mat",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/44_cat.jpg",
+                        "caption": "a cat"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "cat",
+                        "cat"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 27,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute dog in a red collar",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/07_dog.jpg",
+                        "caption": "a dog"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "dog",
+                        "dog"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 28,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a heron standing by a pond",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/animal/11_heron.jpg",
+                        "caption": "a heron"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "heron",
+                        "heron"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 29,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/05_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 30,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman smiling in a flower-filled garden",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/03_woman.jpg",
+                        "caption": "a woman"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "woman",
+                        "woman"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 31,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a cute boy smiling in a crib.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/00_boy.jpg",
+                        "caption": "a boy"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "boy",
+                        "boy"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 32,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a boy smiling in a sunny park",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/14_boy.jpg",
+                        "caption": "a boy"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "boy",
+                        "boy"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 33,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/06_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 34,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a girl smiling in a flower-filled garden",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/19_girl.jpg",
+                        "caption": "a girl"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "girl",
+                        "girl"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 35,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman in a red dress smiling",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/09_woman.jpg",
+                        "caption": "a woman"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "woman",
+                        "woman"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 36,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/07_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 37,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman standing in a park",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/13_woman.jpg",
+                        "caption": "a woman"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "woman",
+                        "woman"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 38,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man wearing a hat standing in the forest",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/17_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 39,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/02_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 40,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman standing in a garden",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/15_woman.jpg",
+                        "caption": "a woman"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "woman",
+                        "woman"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 41,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman standing in a flower-filled garden",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/12_woman.jpg",
+                        "caption": "a woman"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "woman",
+                        "woman"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 42,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/08_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 43,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/18_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 44,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/11_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 45,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/01_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 46,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/10_man.jpg",
+                        "caption": "a man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "man",
+                        "man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 47,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "an old man sitting on a bench.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/16_old man.jpg",
+                        "caption": "an old man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "old man",
+                        "old man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 48,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a little girl smiling in a garden.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/human/04_little girl.jpg",
+                        "caption": "a little girl"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "little girl",
+                        "little girl"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 49,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a man wearing a watch, standing. ",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/12_watch.jpg",
+                        "caption": "a watch"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "watch",
+                        "watch"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 50,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "anime spider-man in a city background",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/71_anime Spider-Man.jpg",
+                        "caption": "an anime spider-man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "anime spider-man",
+                        "anime spider-man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 51,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person wearing a cap smiling",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/32_cap.jpg",
+                        "caption": "a cap"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "cap",
+                        "cap"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 52,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "anime girl in a cute pose",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/66_anime girl.jpg",
+                        "caption": "an anime girl"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "anime girl",
+                        "anime girl"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 53,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person holding a mug in the kitchen",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/27_mug.jpg",
+                        "caption": "a mug"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "mug",
+                        "mug"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 54,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing among cherry blossoms",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/03_cherry blossoms.jpg",
+                        "caption": "a cherry blossoms"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "cherry blossoms",
+                        "cherry blossoms"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 55,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person rowing a boat on the lake",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/62_boat.jpg",
+                        "caption": "a boat"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "boat",
+                        "boat"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 56,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing by a stop sign",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/51_stop sign.jpg",
+                        "caption": "a stop sign"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "stop sign",
+                        "stop sign"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 57,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a guy playing guitar on the street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/39_guitar.jpg",
+                        "caption": "a guitar"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "guitar",
+                        "guitar"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 58,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing in front of a house",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/14_house.jpg",
+                        "caption": "a house"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "house",
+                        "house"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 59,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing in front of wooden house",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/45_wooden house.jpg",
+                        "caption": "a wooden house"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "wooden house",
+                        "wooden house"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 60,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person in a yellow taxi",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/44_yellow taxi.jpg",
+                        "caption": "a yellow taxi"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "yellow taxi",
+                        "yellow taxi"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 61,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "anime girl in a cute pose",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/70_anime girl.jpg",
+                        "caption": "an anime girl"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "anime girl",
+                        "anime girl"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 62,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person wearing a ring smiling\n",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/16_ring.jpg",
+                        "caption": "a ring"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "ring",
+                        "ring"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 63,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing by an airplane",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/37_airplane.jpg",
+                        "caption": "an airplane"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "airplane",
+                        "airplane"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 64,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a teddy bear sitting on a cozy sofa",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/13_teddy bear.jpg",
+                        "caption": "a teddy bear"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "teddy bear",
+                        "teddy bear"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 65,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person wearing sunglasses casually",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/58_sunglasses.jpg",
+                        "caption": "a sunglasses"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "sunglasses",
+                        "sunglasses"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 66,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person looking at a clock on the wall",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/56_clock.jpg",
+                        "caption": "a clock"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "clock",
+                        "clock"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 67,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person holding a pineapple smiling",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/43_pineapple.jpg",
+                        "caption": "a pineapple"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "pineapple",
+                        "pineapple"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 68,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person sitting in front of a vintage television",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/49_vintage television.jpg",
+                        "caption": "a vintage television"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "vintage television",
+                        "vintage television"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 69,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person using a vintage computer",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/35_vintage computer.jpg",
+                        "caption": "a vintage computer"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "vintage computer",
+                        "vintage computer"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 70,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "anime man in a cool pose",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/73_anime man.jpg",
+                        "caption": "an anime man"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "anime man",
+                        "anime man"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 71,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person in a t-shirt smiling",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/41_t-shirt.jpg",
+                        "caption": "a t-shirt"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "t-shirt",
+                        "t-shirt"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 72,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman holding a teapot in the kitchen",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/52_teapot.jpg",
+                        "caption": "a teapot"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "teapot",
+                        "teapot"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 73,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a robot standing in a city street",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/18_robot.jpg",
+                        "caption": "a robot"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "robot",
+                        "robot"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 74,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person carrying a backpack walking",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/28_backpack.jpg",
+                        "caption": "a backpack"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "backpack",
+                        "backpack"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 75,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person holding a magic cube",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/20_Magic Cube.jpg",
+                        "caption": "a magic cube"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "magic cube",
+                        "magic cube"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 76,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person wearing headphones, standing",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/55_headphones.jpg",
+                        "caption": "a headphones"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "headphones",
+                        "headphones"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 77,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person riding a bicycle outdoors",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/17_bicycle.jpg",
+                        "caption": "a bicycle"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "bicycle",
+                        "bicycle"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 78,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a steam locomotive chugging on tracks",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/19_steam locomotive.jpg",
+                        "caption": "a steam locomotive"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "steam locomotive",
+                        "steam locomotive"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 79,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person sitting in an armchair",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/11_armchair.jpg",
+                        "caption": "an armchair"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "armchair",
+                        "armchair"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 80,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person eating a donut casually.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/38_donut.jpg",
+                        "caption": "a donut"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "donut",
+                        "donut"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 81,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a woman holds a leather handbag.",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/57_leather handbag.jpg",
+                        "caption": "a leather handbag"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "leather handbag",
+                        "leather handbag"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 82,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a rider on a motorcycle speeding",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/00_motorcycle.jpg",
+                        "caption": "a motorcycle"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "motorcycle",
+                        "motorcycle"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 83,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a teddy bear sitting on a sofa",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/46_teddy bear.jpg",
+                        "caption": "a teddy bear"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "teddy bear",
+                        "teddy bear"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 84,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "anime samurai in a traditional pose",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/69_anime samurai.jpg",
+                        "caption": "an anime samurai"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "anime samurai",
+                        "anime samurai"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 85,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person sipping a cocktail in bar",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/63_cocktail.jpg",
+                        "caption": "a cocktail"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "cocktail",
+                        "cocktail"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 86,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a classical bust on a pedestal",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/25_classical bust.jpg",
+                        "caption": "a classical bust"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "classical bust",
+                        "classical bust"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 87,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person in a hot air balloon flying",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/09_hot air balloon.jpg",
+                        "caption": "a hot air balloon"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "hot air balloon",
+                        "hot air balloon"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 88,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "a person standing in front of a hut",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/42_hut.jpg",
+                        "caption": "a hut"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "hut",
+                        "hut"
+                    ]
+                ]
+            }
+        ]
+    },
+    {
+        "index": 89,
+        "input_images": [],
+        "position_delta": [
+            0,
+            -32
+        ],
+        "prompt": "pixelated warrior standing in a pixel world",
+        "modulation": [
+            {
+                "type": "adapter",
+                "src_inputs": [
+                    {
+                        "image_path": "assets/XVerseBench/object/67_pixelated warrior.jpg",
+                        "caption": "a pixelated warrior"
+                    }
+                ],
+                "use_words": [
+                    [
+                        0,
+                        "pixelated warrior",
+                        "pixelated warrior"
+                    ]
+                ]
+            }
+        ]
+    }
+]
