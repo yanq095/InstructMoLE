@@ -235,12 +235,6 @@ def parse_args(input_args=None):
 
 
 def save_images(images, captions, save_dir):
-    """
-    images: list of PIL.Image
-    captions: list of str，作为文件名一部分（可选）
-    save_dir: 保存的目录
-    resize_height: 图片高度，宽度等比例缩放
-    """
     os.makedirs(save_dir, exist_ok=True)
     for i, img in enumerate(images):
         if captions is not None:
@@ -263,37 +257,23 @@ def stitch_images(images: list, orientation: str = 'horizontal', bg_color: tuple
         return images[0]
 
     if orientation == 'horizontal':
-        # 水平拼接
-        # 总宽度是所有图片宽度之和
         total_width = sum(img.width for img in images)
-        # 高度取所有图片中的最大高度
         max_height = max(img.height for img in images)
-        
-        # 创建一张新的空白图片
         new_image = Image.new('RGB', (total_width, max_height), bg_color)
         
         current_x = 0
         for img in images:
-            # 将图片粘贴到新图上
             new_image.paste(img, (current_x, 0))
-            # 更新下一张图片的起始 X 坐标
             current_x += img.width
             
     elif orientation == 'vertical':
-        # 垂直拼接
-        # 宽度取所有图片中的最大宽度
         max_width = max(img.width for img in images)
-        # 总高度是所有图片高度之和
         total_height = sum(img.height for img in images)
-        
-        # 创建一张新的空白图片
         new_image = Image.new('RGB', (max_width, total_height), bg_color)
         
         current_y = 0
         for img in images:
-            # 将图片粘贴到新图上
             new_image.paste(img, (0, current_y))
-            # 更新下一张图片的起始 Y 坐标
             current_y += img.height
     else:
         raise ValueError("Invalid orientation. Choose 'horizontal' or 'vertical'.")
@@ -395,8 +375,6 @@ def main(args):
             all_keys.append(k)
     images_to_process = all_images[accelerator.process_index::accelerator.num_processes]
     prompts_to_process = all_prompts[accelerator.process_index::accelerator.num_processes]
-    # 为了保存文件时文件名仍然是全局唯一的，我们需要原始的索引
-    # 例如，GPU 0 处理 0, 4, 8... GPU 1 处理 1, 5, 9...
     if args.task == "complex_edit":
         indices_to_process = list(range(len(all_images)))[accelerator.process_index::accelerator.num_processes]
     else:
@@ -430,7 +408,6 @@ def main(args):
             #         # max_sequence_length=512,
             #         # guidance_scale=2.5,
             #     ).images[0]
-            # 使用全局索引 idx 来命名文件，避免冲突
             edited_image.save(output_filepath)
     elif args.task == "omnicontext":
         for key, task_type, image, prompt in zip(key_to_process, task_type_to_process, images_to_process, prompts_to_process):
@@ -460,7 +437,6 @@ def main(args):
             #         # max_sequence_length=512,
             #         # guidance_scale=2.5,
             #     ).images[0]
-            # 使用全局索引 idx 来命名文件，避免冲突
             edited_image.save(output_filepath)
     elif args.task == "gedit":
         for key, task_type, image, prompt in zip(key_to_process, task_type_to_process, images_to_process, prompts_to_process):
@@ -485,7 +461,6 @@ def main(args):
             #         # max_sequence_length=512,
             #         # guidance_scale=2.5,
             #     ).images[0]
-            # 使用全局索引 idx 来命名文件，避免冲突
             edited_image.save(output_filepath)
     elif args.task == "imagedit":
         for key, task_type, image, prompt in zip(key_to_process, task_type_to_process, images_to_process, prompts_to_process):
@@ -511,7 +486,6 @@ def main(args):
             #         # max_sequence_length=512,
             #         # guidance_scale=2.5,
             #     ).images[0]
-            # 使用全局索引 idx 来命名文件，避免冲突
             edited_image.save(output_filepath)
 
 if __name__ == "__main__":

@@ -10,6 +10,7 @@ from accelerate.logging import get_logger
 from accelerate.utils import set_seed
 import json
 import wandb
+import torch
 from peft import LoraConfig, get_peft_model_state_dict
 from tqdm.auto import tqdm
 from transformers import CLIPTokenizer, PretrainedConfig, T5TokenizerFast
@@ -41,19 +42,8 @@ from src.combined_dataloader import CombinedDataLoader
 from src.transformer_flux_kontext import FluxTransformer2DModel
 from diffusers.image_processor import VaeImageProcessor
 from src.dataloader_pose import prepare_pose_dataloader
-from src.dataloader_multi_obj import prepare_multi_obj_dataloader
-from src.dataloader_style import prepare_style_dataloader
-from src.dataloader_face import prepare_face_dataloader
-from src.dataloader_tryon_v2 import prepare_tryon_dataloader
-from src.dataloader_swapface import prepare_swap_face_dataloader
-from src.dataloader_2subjects import prepare_2subs_dataloader
 from src.dataloader_subject import prepare_sub_dataloader
-from src.dataloader_multi_subjects import prepare_multisub_dataloader
-from src.dataloader_peoobj import prepare_po_dataloader
-from src.dataloader_relight import prepare_relight_dataloader
-from src.dataloader_relight_bg import prepare_relight_bg_dataloader
-from src.dataloader_multi_person import prepare_multi_person_dataloader
-from src.dataloader_gptedit import prepare_gptedit_dataloader
+from src.dataloader_omniedit import prepare_omniedit_dataloader
 
 image_processor = VaeImageProcessor(do_resize=True)
 import torch.nn.functional as F
@@ -93,94 +83,24 @@ def prepare_dataloaders(args, accelerator: Accelerator):
     train_dataloader_pose = prepare_pose_dataloader(args, accelerator)
     first_eval_batches += [next(iter(train_dataloader_pose))]
     datasets.append(train_dataloader_pose)
-    ratios.append(10)
-    train_dataloader_tryon = prepare_tryon_dataloader(args, 1, accelerator)
-    datasets.append(train_dataloader_tryon)
-    ratios.append(5)
-    # train_dataloader_4sub = prepare_multisub_dataloader(4, args, accelerator)
-    # first_eval_batches += [next(iter(train_dataloader_4sub))]
-    # datasets.append(train_dataloader_4sub)
-    # ratios.append(2)
-    train_dataloader_multisub = prepare_multisub_dataloader(3, args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_multisub))]
-    datasets.append(train_dataloader_multisub)
-    ratios.append(5)
-    first_eval_batches += [next(iter(train_dataloader_multisub))]
-    train_dataloader_tryon = prepare_tryon_dataloader(args, 3, accelerator)
-    datasets.append(train_dataloader_tryon)
-    ratios.append(5)
-    train_dataloader_tryon = prepare_tryon_dataloader(args, 4, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_tryon))]
-    datasets.append(train_dataloader_tryon)
-    ratios.append(5)
-    train_dataloader_sub = prepare_sub_dataloader(accelerator, 2, args)
-    datasets.append(train_dataloader_sub)
-    ratios.append(5)
+    
     train_dataloader_sub = prepare_sub_dataloader(accelerator, 1, args)
     datasets.append(train_dataloader_sub)
-    ratios.append(5)
-    train_dataloader_sub = prepare_sub_dataloader(accelerator, 4, args)
+    train_dataloader_sub = prepare_sub_dataloader(accelerator, 2, args)
     datasets.append(train_dataloader_sub)
-    ratios.append(5)
-    first_eval_batches += [next(iter(train_dataloader_sub))]
-    train_dataloader_style = prepare_style_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_style))]
-    datasets.append(train_dataloader_style)
-    ratios.append(15)
-    train_dataloader_sub = prepare_2subs_dataloader(accelerator, args)
-    datasets.append(train_dataloader_sub)
-    ratios.append(5)
-    train_dataloader_face = prepare_face_dataloader(args, accelerator, True)
-    first_eval_batches += [next(iter(train_dataloader_face))]
-    datasets.append(train_dataloader_face)
-    ratios.append(20)
-    train_dataloader_relight_bg = prepare_relight_bg_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_relight_bg))]
-    datasets.append(train_dataloader_relight_bg)
-    ratios.append(5)
-    train_dataloader_multisub = prepare_multisub_dataloader(2, args, accelerator)
-    datasets.append(train_dataloader_multisub)
-    ratios.append(5)
-    train_dataloader_swapface = prepare_swap_face_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_swapface))]
-    datasets.append(train_dataloader_swapface)
-    ratios.append(15)
-    train_dataloader_relight = prepare_relight_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_relight))]
-    datasets.append(train_dataloader_relight)
-    ratios.append(5)
     train_dataloader_sub = prepare_sub_dataloader(accelerator, 3, args)
     datasets.append(train_dataloader_sub)
-    ratios.append(5)
-    train_dataloader_po = prepare_po_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader_po))]
-    datasets.append(train_dataloader_po)
-    ratios.append(10)
-    train_dataloader = prepare_multi_person_dataloader(args, 2, accelerator)
-    first_eval_batches += [next(iter(train_dataloader))]
-    datasets.append(train_dataloader)
-    ratios.append(10)
-    train_dataloader = prepare_multi_person_dataloader(args, 3, accelerator)
-    first_eval_batches += [next(iter(train_dataloader))]
-    datasets.append(train_dataloader)
-    ratios.append(10)
-    train_dataloader = prepare_multi_person_dataloader(args, 4, accelerator)
-    first_eval_batches += [next(iter(train_dataloader))]
-    datasets.append(train_dataloader)
-    ratios.append(5)
-    train_dataloader_tryon = prepare_tryon_dataloader(args, 2, accelerator)
-    datasets.append(train_dataloader_tryon)
-    first_eval_batches += [next(iter(train_dataloader_tryon))]
-    ratios.append(5)
-    train_dataloader = prepare_gptedit_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader))]
-    datasets.append(train_dataloader)
-    ratios.append(20)
-    train_dataloader = prepare_multi_obj_dataloader(args, accelerator)
-    first_eval_batches += [next(iter(train_dataloader))]
-    datasets.append(train_dataloader)
-    ratios.append(20)
-    train_dataloader = CombinedDataLoader(dataloaders_list=datasets, ratios=ratios, seed=args.seed+global_rank)
+    
+    train_dataloader_edit = prepare_omniedit_dataloader(args, accelerator)
+    first_eval_batches += [next(iter(train_dataloader_edit))]
+    datasets.append(train_dataloader_edit)
+
+    from src.dataloader_multi_subjects import prepare_multi_sub_dataloader
+    train_dataloader_multi_sub = prepare_multi_sub_dataloader(args, accelerator)
+    first_eval_batches += [next(iter(train_dataloader_multi_sub))]
+    datasets.append(train_dataloader_multi_sub)
+    
+    train_dataloader = CombinedDataLoader(dataloaders_list=datasets, seed=args.seed+global_rank)
     print(f"rank {global_rank} has {len(datasets)} dataloaders")
     accelerator.wait_for_everyone()
     return train_dataloader, first_eval_batches
@@ -190,13 +110,11 @@ def load_text_encoders(class_one, class_two):
         args.pretrained_model_name_or_path,
         subfolder="text_encoder",
         revision=args.revision,
-        variant=args.variant,
     )
     text_encoder_two = class_two.from_pretrained(
         args.pretrained_model_name_or_path,
         subfolder="text_encoder_2",
         revision=args.revision,
-        variant=args.variant,
     )
     return text_encoder_one, text_encoder_two
 
@@ -233,12 +151,12 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--pretrained_model_name_or_path",
         type=str,
-        default="models/black-forest-labs/FLUX.1-Kontext-dev",
+        default="black-forest-labs/FLUX.1-Kontext-dev",
     )
     parser.add_argument(
         "--transformer",
         type=str,
-        default="models/black-forest-labs/FLUX.1-Kontext-dev",
+        default="black-forest-labs/FLUX.1-Kontext-dev",
     )
     parser.add_argument(
         "--max_sequence_length",
@@ -337,6 +255,13 @@ def parse_args(input_args=None):
         ),
     )
     parser.add_argument(
+        "--revision",
+        type=str,
+        default=None,
+        required=False,
+        help="Revision of pretrained model identifier from huggingface.co/models.",
+    )
+    parser.add_argument(
         "--optimizer",
         type=str,
         default="AdamW",
@@ -410,25 +335,20 @@ def parse_args(input_args=None):
 
 def parse_target_modules(module_templates, transformer):
     final_modules = []
-    # 确定不同 block 的层数
     num_single_layers = len(transformer.single_transformer_blocks) if hasattr(transformer, 'single_transformer_blocks') else 0
     num_double_layers = len(transformer.transformer_blocks) if hasattr(transformer, 'transformer_blocks') else 0
     for template in module_templates:
         if "*" not in template:
-            # 如果没有通配符，直接添加
             final_modules.append(template)
             continue
-        # --- 处理通配符 ---
         if "single_transformer_blocks" in template:
-            # 替换 '*' 为格式化占位符 '{i}'，然后展开
             f_string = template.replace("*", "{i}")
             final_modules.extend([f_string.format(i=i) for i in range(num_single_layers)])
         elif "transformer_blocks" in template:
-            # 为双流区也增加支持
             f_string = template.replace("*", "{i}")
             final_modules.extend([f_string.format(i=i) for i in range(num_double_layers)])
         else:
-            print(f"警告: 模板 '{template}' 包含通配符 '*'，但无法确定其上下文，已忽略。")
+            pass
     return final_modules
 
 
@@ -443,13 +363,6 @@ def get_cosine_decay_schedule(current_step: int, total_steps: int, min_value: fl
     return decay_value
 
 def save_images(images, captions, save_dir, prefixs="img", resize_height=512):
-    """
-    images: list of PIL.Image
-    captions: list of str，作为文件名一部分（可选）
-    save_dir: 保存的目录
-    prefix: 文件名前缀
-    resize_height: 图片高度，宽度等比例缩放
-    """
     os.makedirs(save_dir, exist_ok=True)
     for i, img in enumerate(images):
         # resize
@@ -457,9 +370,7 @@ def save_images(images, captions, save_dir, prefixs="img", resize_height=512):
         aspect_ratio = original_width / original_height
         new_width = int(resize_height * aspect_ratio)
         resized_img = img.resize((new_width, resize_height), Image.LANCZOS)
-        # 生成文件名
         if captions is not None:
-            # 去掉特殊字符，防止文件名出错
             caption_str = "".join(
                 c for c in captions[i] if c.isalnum() or c in [" ", "_", "-"]
             )[:50]
@@ -520,7 +431,6 @@ def main(args):
     tokenizer_one = CLIPTokenizer.from_pretrained(
         args.pretrained_model_name_or_path,
         subfolder="tokenizer",
-        revision=args.revision,
     )
     tokenizer_two = T5TokenizerFast.from_pretrained(
         args.pretrained_model_name_or_path,
@@ -552,7 +462,6 @@ def main(args):
         args.pretrained_model_name_or_path,
         subfolder="vae",
         revision=args.revision,
-        variant=args.variant,
     ).to(accelerator.device, dtype=weight_dtype)
     vae_scale_factor = 2 ** (len(vae.config.block_out_channels) - 1)
 
@@ -560,7 +469,6 @@ def main(args):
         pretrained_model_name_or_path=args.pretrained_model_name_or_path,
         subfolder="transformer",
         revision=args.revision,
-        variant=args.variant,
     ).to(accelerator.device, dtype=weight_dtype)
 
     # freeze parameters of models to save more memory
@@ -1150,20 +1058,9 @@ def main(args):
                 accelerator.backward(loss)
 
             if accelerator.sync_gradients:
-                # ==========================================================
-                # --- WANDB 可视化日志记录 - 开始 ---
-                # ==========================================================
                 if accelerator.is_main_process:
-                    # --- 1. 准备一个字典来存放所有要记录的指标 ---
                     logs = {}
-
-                    # --- 2. 记录基础损失 ---
                     logs["loss/total"] = loss.detach().item()
-                    # if low_entropy_loss is not None:
-                    #     logs["loss/main"] = main_loss.detach().item()
-                    #     logs["loss/low_entropy_loss"] = low_entropy_loss.detach().item()
-
-                    # --- 5. 发送所有日志到 WandB ---
                     wandb.log(logs, step=global_step)
 
                 params_to_clip = transformer.parameters()
@@ -1407,27 +1304,20 @@ def main(args):
                             LoRAMoE.debug = False
                             if accelerator.is_main_process:
                                 for name, module in unwrapped_model.named_modules():
-                                    # 检查是否是我们关心的、带有路由结果的门控
                                     if isinstance(module, LoRAMoE) and isinstance(module.gate, TopKGate):
                                         if module.route_by_type:
-                                            # 直接从门控对象中读取已经暂存好的路由决策！
                                             selected_indices = module.latest_token_indices
                                             selected_weights = module.latest_token_weights
                                             
                                             if selected_indices is None: 
-                                                # 如果这个batch由于某些原因没有执行这个MoE层，则跳过
                                                 print("No selected indices")
                                                 continue
                                             
-                                            # 初始化collector
                                             if name not in affinity_data_collector:
                                                 affinity_data_collector[name] = {}
                                             
-                                            # 按任务类型，逐样本收集“被选中的专家”
-                                            # (这部分逻辑与之前完全一样)
                                             task_name = condition_types[0][0] if condition_types[0][0] else "unknown"
                                             if task_name not in affinity_data_collector[name]:
-                                                # 现在我们为每个任务初始化一个权重总和张量
                                                 affinity_data_collector[name][task_name] = torch.zeros(
                                                     moe_config["num_experts"], 
                                                     device=selected_weights.device, 
@@ -1446,11 +1336,9 @@ def main(args):
                                                         moe_config["num_experts"], device=accelerator.device, dtype=torch.float32
                                                     )
                                                 
-                                                # 获取并展平路由决策
                                                 indices = module.latest_token_indices.view(-1)
                                                 weights = module.latest_token_weights.view(-1)
                                                 
-                                                # 使用 scatter_add_ 高效地累加每个专家的权重
                                                 token_affinity_data_collector[name].scatter_add_(0, indices, weights.float())
                 
                             res = []
@@ -1500,12 +1388,9 @@ def main(args):
                                     concat_image = Image.new(
                                         "RGB", (total_width, base_height)
                                     )
-                                    # 粘贴 gt 图像
                                     concat_image.paste(gt[i], (0, 0))
                                     x_offset = base_width
                                     for j, p in enumerate(persons):
-                                        # 计算缩放后的宽度，保持宽高比，并使高度与 base_height 相同
-                                        # 如果 p_img 的高度与 base_height 不同，则需要调整
                                         p_img = p[i]
                                         if p_img.size[1] != base_height:
                                             aspect_ratio = p_img.size[0] / p_img.size[1]
@@ -1513,7 +1398,7 @@ def main(args):
                                             p_img_resized = p_img.resize(
                                                 (new_width, base_height),
                                                 Image.Resampling.LANCZOS,
-                                            )  # 使用高质量的缩放算法
+                                            )
                                         else:
                                             p_img_resized = p_img
                                         if p_img.size[1] != base_height:
@@ -1525,24 +1410,23 @@ def main(args):
                                             )
                                         else:
                                             p_img_resized = p_img
-                                        # 创建一个与基准图像大小相同的画布
+                                       
                                         person_canvas = Image.new(
                                             "RGB", (base_width, base_height), color="black"
-                                        )  # 可以选择背景色
-                                        # 计算粘贴位置，使其居中
+                                        )  
                                         paste_x = (base_width - p_img_resized.size[0]) // 2
                                         paste_y = (base_height - p_img_resized.size[1]) // 2
                                         person_canvas.paste(
                                             p_img_resized, (paste_x, paste_y)
                                         )
                                         concat_image.paste(person_canvas, (x_offset, 0))
-                                        x_offset += base_width  # 更新下一个图像的X偏移量
+                                        x_offset += base_width  
                                     gen_img_resized = gen_img.resize(
                                         (base_width, base_height), Image.Resampling.LANCZOS
                                     )
                                     concat_image.paste(
                                         gen_img_resized, (x_offset, 0)
-                                    )  # x_offset 此时是最后一个 persons 图像之后的位置
+                                    )  
                                     res.append(concat_image)
                             elif "objects" in first_eval_batch:
                                 res = []
@@ -1567,12 +1451,9 @@ def main(args):
                                     concat_image = Image.new(
                                         "RGB", (total_width, base_height)
                                     )
-                                    # 粘贴 gt 图像
                                     concat_image.paste(gt[i], (0, 0))
                                     x_offset = base_width
                                     for j, p in enumerate(persons):
-                                        # 计算缩放后的宽度，保持宽高比，并使高度与 base_height 相同
-                                        # 如果 p_img 的高度与 base_height 不同，则需要调整
                                         p_img = p[i]
                                         if p_img.size[1] != base_height:
                                             aspect_ratio = p_img.size[0] / p_img.size[1]
@@ -1592,24 +1473,22 @@ def main(args):
                                             )
                                         else:
                                             p_img_resized = p_img
-                                        # 创建一个与基准图像大小相同的画布
                                         person_canvas = Image.new(
                                             "RGB", (base_width, base_height), color="black"
-                                        )  # 可以选择背景色
-                                        # 计算粘贴位置，使其居中
+                                        ) 
                                         paste_x = (base_width - p_img_resized.size[0]) // 2
                                         paste_y = (base_height - p_img_resized.size[1]) // 2
                                         person_canvas.paste(
                                             p_img_resized, (paste_x, paste_y)
                                         )
                                         concat_image.paste(person_canvas, (x_offset, 0))
-                                        x_offset += base_width  # 更新下一个图像的X偏移量
+                                        x_offset += base_width  
                                     gen_img_resized = gen_img.resize(
                                         (base_width, base_height), Image.Resampling.LANCZOS
                                     )
                                     concat_image.paste(
                                         gen_img_resized, (x_offset, 0)
-                                    )  # x_offset 此时是最后一个 persons 图像之后的位置
+                                    )  
                                     res.append(concat_image)
                             elif "cloth" in first_eval_batch:
                                 res = []
@@ -1804,7 +1683,6 @@ def main(args):
                             num_experts = len(expert_weights_np)
                             expert_ids = [f"Expert {i}" for i in range(num_experts)]
                             
-                            # 归一化为百分比分布
                             total_weight = expert_weights_np.sum()
                             if total_weight > 1e-8:
                                 distribution = (expert_weights_np / total_weight) * 100
@@ -1835,23 +1713,19 @@ def main(args):
                             num_experts = moe_config["num_experts"]
                             
                             for task_name, total_weights_tensor in collected_data_by_task.items():
-                                # 现在 total_weights_tensor 直接就是我们累加好的权重总和
-                                
-                                # (可选) 归一化：让每个任务的权重总和为1，更方便比较相对重要性
+                              
                                 sum_of_weights = total_weights_tensor.sum()
-                                if sum_of_weights > 1e-6: # 避免除以零
+                                if sum_of_weights > 1e-6: 
                                     normalized_weights = total_weights_tensor / sum_of_weights
                                 else:
                                     normalized_weights = total_weights_tensor
                                 
                                 task_total_weights[task_name] = normalized_weights.cpu().float().numpy()
-
-                            # --- 准备热力图数据 ---
                             tasks = sorted(list(task_total_weights.keys()))
                             expert_ids = [f"E{i}" for i in range(num_experts)]
                             
                             heatmap_data = [task_total_weights[task] for task in tasks]
-                            # --- 使用 wandb.Image 记录热力图 ---
+                            
                             try:
                                 fig, ax = plt.subplots(figsize=(10, max(6, len(tasks))))
                                 sns.heatmap(
@@ -1860,7 +1734,7 @@ def main(args):
                                     yticklabels=tasks,
                                     annot=True, fmt=".3f", cmap="viridis", ax=ax
                                 )
-                                # 修改标题以反映内容变化
+
                                 ax.set_title(f"Expert Routing Weight Distribution @ step {global_step}\nLayer: {layer_name}")
                                 plt.tight_layout()
                                 
@@ -1872,20 +1746,7 @@ def main(args):
                             except ImportError:
                                 logger.warning("matplotlib/seaborn not found. Skipping heatmap.")
                 accelerator.wait_for_everyone()
-            # logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0]}
-            # logs = {"step_loss": loss.detach().item()}
-
-            # progress_bar.set_postfix(**logs)
-            # accelerator.log(logs, step=global_step)
-
-            # if not use_lora_only and global_step >= 30000 and not freeze_gate:
-            #     print("Freeze Gate!")
-            #     freeze_gate = True
-            #     set_expert_gate_status(
-            #         accelerator.unwrap_model(transformer),
-            #         mole_config,
-            #         requires_grad=False,
-            #     )
+            
             if global_step >= args.max_train_steps:
                 break
         if global_step >= args.max_train_steps:

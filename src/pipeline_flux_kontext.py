@@ -696,17 +696,12 @@ class FluxKontextPipeline(
                 )
                 # image ids are the same as latent ids with the first dimension set to 1 instead of 0
                 image_ids[..., 0] = idx + 1
-                # 对于第二张及以后图片，image_ids 需要加上 offset
+                # image_ids + offset for the other images after second image
                 if idx > 0:
-                    # 横向拼接，offset_w 叠加
-                    image_ids[..., 2] += offset_w  # 假设 image_ids[..., 2] 是 width/x 方向
-                    # 如果你是纵向拼接，改为 image_ids[..., 1] += offset_h
-                # 保存本图片的 latents 和 ids
+                    image_ids[..., 2] += offset_w  
                 image_latents_list.append(image_latents)
                 image_ids_list.append(image_ids)
-                # 更新 offset
-                offset_w += image_latent_width // 2  # 横向拼接
-        # 最后拼接所有 latents 和 ids
+                offset_w += image_latent_width // 2  
         vae_conds_len = None
         if len(images) > 0:
             image_latents = torch.cat(image_latents_list[:len(images)], dim=1)  

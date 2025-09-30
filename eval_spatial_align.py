@@ -59,10 +59,6 @@ logger = get_logger(__name__, log_level="INFO")
 
 
 def resize_tensor_to_max_side(tensor, max_side=512):
-    """
-    tensor: [B, 3, H, W] or [3, H, W], float32, RGB, [-1,1]
-    返回等比例缩小到最大边不超过max_side，且高宽都是16的倍数的tensor
-    """
     is_batched = tensor.ndim == 4
     if not is_batched:
         tensor = tensor.unsqueeze(0)  # [1, 3, H, W]

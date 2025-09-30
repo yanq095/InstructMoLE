@@ -11,7 +11,6 @@ from datasets import load_dataset
 import json
 from torchvision.transforms import InterpolationMode
 from transformers import pipeline
-from src.condition import *
 from src.adaptive_resize import AdaptiveResizeMultipleOf
 from torch.utils.data import DataLoader, DistributedSampler
 # depth_pipe = pipeline(
@@ -162,7 +161,7 @@ class OpenposeDataset(Dataset):
     ):
         # NOTE: You may need to adjust the dataset path
         super().__init__()
-        dataset = load_dataset("dataset/coco2017_caption_openpose")
+        dataset = load_dataset("limingcv/Captioned_COCOPose")
         self.base_dataset = dataset["train"]
         self.condition_size = condition_size
         self.target_size = target_size
@@ -176,8 +175,8 @@ class OpenposeDataset(Dataset):
     def __getitem__(self, idx):
         item = self.base_dataset[idx]
         target_image = item["image"]
-        primary_pose_image = item["conditioning_image"]
-        description = item["text"]
+        primary_pose_image = item["control_pose"]
+        description = item["caption"]
 
         # --- 2. Correctly prepare all conditions and their types ---
         condition_latents = []

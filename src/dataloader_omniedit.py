@@ -7,7 +7,6 @@ import torchvision.transforms as T
 import random
 from datasets import load_dataset
 import json
-from src.condition import *
 from src.adaptive_resize import AdaptiveResizeMultipleOf
 from torch.utils.data import DataLoader, DistributedSampler
 import torch.nn.functional as F

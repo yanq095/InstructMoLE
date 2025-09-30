@@ -4,22 +4,9 @@ import io
 import random
 logger = get_logger(__name__)
 from PIL import Image
-from src.condition import Condition
 from diffusers.image_processor import VaeImageProcessor
-from datasets import load_dataset, concatenate_datasets
+from datasets import load_dataset
 from torch.utils.data import DataLoader, DistributedSampler
-
-def get_dataset():
-    dataset = []
-    dataset_name = [
-            "dataset/split_SubjectSpatial200K/train",
-            "dataset/split_SubjectSpatial200K/Collection3/train",
-        ]
-    for name in dataset_name:
-        # Downloading and loading a dataset from the hub.
-        dataset.append(load_dataset(name, cache_dir='cache/sub', split="train"))
-    dataset = concatenate_datasets(dataset).shuffle()
-    return dataset
 
 def get_ordinal_en(n_idx, total_num):  # n_idx is the 0-based index
     if total_num == 2:
@@ -36,13 +23,11 @@ def get_ordinal_en(n_idx, total_num):  # n_idx is the 0-based index
     elif val % 10 == 3 and val % 100 != 13: return f"{val}rd"
     else: return f"{val}th"
 
-# "using the" 的多样化表达
 USING_PHRASES = [
     "using the", "utilize the", "apply the", "with the help of the", 
     "by means of the", "based on the", "leveraging the"
 ]
 
-# "canny edge" 的多样化表达
 CANNY_PHRASES = [
     "canny edge of the {ref_no} image",
     "canny map from the {ref_no} image",
@@ -65,7 +50,6 @@ SUBJECT_PHRASES = [
     "take the {item} in the {ref_no} image as reference"
 ]
 
-# "inpaint the black area" 的多样化表达
 FILL_PHRASES = [
     "inpaint the black area based on the {ref_no} image",
     "fill in the masked region using the {ref_no} image",
@@ -73,7 +57,6 @@ FILL_PHRASES = [
     "inpaint the void by utilizing the {ref_no} image"
 ]
 
-# "recreate image" 的多样化表达
 RECREATE_PHRASES = [
     "to recreate the image.",
     "to generate the final image.",
@@ -142,7 +125,6 @@ def prepare_dataset(dataset, accelerator, cond_num):
                     int(bottom * resolution / height),
                 ]
             )
-            # 应用转换,将分割后的图像添加到列表中
             pixel_values.append(
                 image_processor.preprocess(
                     left_image, width=resolution, height=resolution
@@ -152,7 +134,6 @@ def prepare_dataset(dataset, accelerator, cond_num):
             spatial_cond_prompts = []
             cond_prompts = []
             conditions = []
-             # 1. 根据条件类型生成多样化的指令片段
             for i, cond_type in enumerate(cond_types):
                 ref_no = get_ordinal_en(i, len(cond_types))
                 if cond_type == "canny":
@@ -184,26 +165,20 @@ def prepare_dataset(dataset, accelerator, cond_num):
             style = random.choice(["imperative", "descriptive", "conjunctive"])
 
             if style == "imperative":
-                # 祈使句风格: "Do A. Do B. Then generate..."
                 prompt = ". ".join([p.capitalize() for p in all_conditions])
             elif style == "descriptive":
-                # 描述性风格: "Generate an image by doing A and B, where the result is..."
                 prompt = "Generate an image by " + " and ".join(all_conditions)
             elif style == "conjunctive":
-                # 连接词风格: "With A, and also using B, create..."
                 prompt = ", and also ".join(all_conditions).capitalize()
 
-            # 3. 添加最终的任务描述
             if random.random() < 0.3:
                 prompt += " " + random.choice(RECREATE_PHRASES)
             else:
-                # 将描述性文字更自然地融入
                 if style == "descriptive":
                     prompt += f", making sure the final result is {desc}."
                 else:
                     prompt += f", the goal is to create {desc}."
                     
-            # 清理格式，确保可读性
             prompt = prompt.replace("..", ".").replace(" ,", ",").strip()
             cond_tensors = torch.stack(conditions, dim=0)
             condition_latents.append(cond_tensors)
@@ -247,7 +222,7 @@ def collate_fn(examples):
 
 def prepare_sub_dataloader(accelerator, cond_num, args):
     train_dataset = prepare_dataset(
-        get_dataset(), accelerator, cond_num
+        load_dataset("Xuan-World/SubjectSpatial200K"), accelerator, cond_num
     )
     bsz = max(1, args.train_batch_size//cond_num)
     train_sampler = DistributedSampler(
