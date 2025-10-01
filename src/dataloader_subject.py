@@ -35,14 +35,12 @@ CANNY_PHRASES = [
     "structural outline from the {ref_no} image"
 ]
 
-# "depth map" 的多样化表达
 DEPTH_PHRASES = [
     "depth map of the {ref_no} image",
     "depth information from the {ref_no} image",
     "3D structure from the {ref_no} image"
 ]
 
-# "refer to the subject" 的多样化表达
 SUBJECT_PHRASES = [
     "refer to the {item} in the {ref_no} image",
     "focus on the {item} from the {ref_no} image",
@@ -93,14 +91,12 @@ def prepare_dataset(dataset, accelerator, cond_num):
                 else Image.open(image).convert("RGB")
             )
             width, height = image.size
-            # 检查宽度是否为偶数，以便可以均匀分割
             if width % 2 != 0:
                 raise ValueError(
                     "Image width must be even to split into two equal parts."
                 )
-            # 分割图像
-            left_image = image.crop((0, 0, width // 2, height))  # 左半部分
-            right_image = image.crop((width // 2, 0, width, height))  # 右半部分
+            left_image = image.crop((0, 0, width // 2, height)) 
+            right_image = image.crop((width // 2, 0, width, height))
             # load mask image
             image_width, image_height = image.size
             bbox_pixel = [
@@ -154,14 +150,10 @@ def prepare_dataset(dataset, accelerator, cond_num):
                     conditions.append(image_processor.preprocess(masked_left_image, height=resolution, width=resolution)[0])
                 else:
                     raise ValueError(f"Unknown condition type: {cond_type}")
-            # 2. 用不同的句式结构组合指令片段
             prompt = ""
-            
-            # 将所有条件合并，并打乱顺序，使其不固定
             all_conditions = cond_prompts + spatial_cond_prompts
             random.shuffle(all_conditions)
             
-            # 随机选择一种句式模板
             style = random.choice(["imperative", "descriptive", "conjunctive"])
 
             if style == "imperative":
@@ -222,7 +214,7 @@ def collate_fn(examples):
 
 def prepare_sub_dataloader(accelerator, cond_num, args):
     train_dataset = prepare_dataset(
-        load_dataset("Xuan-World/SubjectSpatial200K"), accelerator, cond_num
+        load_dataset("Xuan-World/SubjectSpatial200K", split='train'), accelerator, cond_num
     )
     bsz = max(1, args.train_batch_size//cond_num)
     train_sampler = DistributedSampler(
@@ -241,3 +233,10 @@ def prepare_sub_dataloader(accelerator, cond_num, args):
         num_workers=args.dataloader_num_workers,
     )
     return train_dataloader
+
+# from accelerate import Accelerator
+# accelerator = Accelerator()
+# train_dataset = prepare_dataset(
+#         load_dataset("Xuan-World/SubjectSpatial200K", split='train'), accelerator, 1
+#     )
+# print(train_dataset[0])

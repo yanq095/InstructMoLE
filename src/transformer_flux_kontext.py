@@ -148,7 +148,7 @@ class FluxSingleTransformerBlock(nn.Module):
             **joint_attention_kwargs,
         )
         # if use_cond:
-        attn_output, cond_attn_output, semantic_attn_output = attn_output
+        attn_output, cond_attn_output = attn_output
 
         with enable_lora((self.proj_out,)):
             hidden_states = torch.cat([attn_output, mlp_hidden_states], dim=2)
@@ -593,7 +593,6 @@ class FluxTransformer2DModel(
         hidden_states: torch.Tensor,
         cond_hidden_states: torch.Tensor = None,
         encoder_hidden_states: torch.Tensor = None,
-        semantic_conds: torch.Tensor = None,
         pooled_projections: torch.Tensor = None,
         timestep: torch.LongTensor = None,
         img_ids: torch.Tensor = None,

@@ -94,15 +94,13 @@ def get_depth_pipe():
     if _depth_pipe is None:
         _depth_pipe = pipeline(
             task="depth-estimation",
-            model="models/depth-anything-small-hf",
+            model="LiheYoung/depth-anything-small-hf",
             device="cpu",
         )
     return _depth_pipe
 
 
 def get_condition(image, cond_type):
-    if cond_type not in condition_dict:
-        raise ValueError(f"Condition type {cond_type} not implemented")
     if cond_type == "canny":
         condition_img = get_canny_edge(image)
     elif cond_type == "coloring":
@@ -161,7 +159,7 @@ class OpenposeDataset(Dataset):
     ):
         # NOTE: You may need to adjust the dataset path
         super().__init__()
-        dataset = load_dataset("limingcv/Captioned_COCOPose")
+        dataset = load_dataset("wangherr/coco2017_train_512x_image_caption_openpose")
         self.base_dataset = dataset["train"]
         self.condition_size = condition_size
         self.target_size = target_size
@@ -175,8 +173,8 @@ class OpenposeDataset(Dataset):
     def __getitem__(self, idx):
         item = self.base_dataset[idx]
         target_image = item["image"]
-        primary_pose_image = item["control_pose"]
-        description = item["caption"]
+        primary_pose_image = item["conditioning_image"]
+        description = item["text"]
 
         # --- 2. Correctly prepare all conditions and their types ---
         condition_latents = []
@@ -223,3 +221,7 @@ def prepare_pose_dataloader(args, accelerator):
         num_workers=args.dataloader_num_workers,
     )
     return train_dataloader
+
+
+# train_dataset = OpenposeDataset()
+# print(train_dataset[0])

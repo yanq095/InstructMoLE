@@ -78,7 +78,6 @@ def prepare_dataloaders(args, accelerator: Accelerator):
         print("-------------------------------------")
     print(f"Machine ID: {machine_id}, Local Rank: {local_rank}")
     datasets = []
-    ratios = []
     first_eval_batches = []
     train_dataloader_pose = prepare_pose_dataloader(args, accelerator)
     first_eval_batches += [next(iter(train_dataloader_pose))]
@@ -88,6 +87,7 @@ def prepare_dataloaders(args, accelerator: Accelerator):
     datasets.append(train_dataloader_sub)
     train_dataloader_sub = prepare_sub_dataloader(accelerator, 2, args)
     datasets.append(train_dataloader_sub)
+    first_eval_batches += [next(iter(train_dataloader_sub))]
     train_dataloader_sub = prepare_sub_dataloader(accelerator, 3, args)
     datasets.append(train_dataloader_sub)
     
@@ -686,118 +686,6 @@ def main(args):
                     condition_types = batch["task"]
                     condition_latents = [batch["src_img"]]
                     hidden_idx = [0]
-                elif "persons" in batch:
-                    prompts = batch["text"]
-                    latent_image = encode_images(
-                        pixels=batch["image"], vae=vae, weight_dtype=weight_dtype
-                    )
-                    condition_types = [["persons"]] * args.train_batch_size
-                    condition_latents = list(torch.unbind(batch["persons"], dim=1))
-                    if random.random() < 0.8:
-                        hidden_idx = [0]
-                elif "objects" in batch:
-                    prompts = batch["text"]
-                    latent_image = encode_images(
-                        pixels=batch["image"], vae=vae, weight_dtype=weight_dtype
-                    )
-                    condition_types = [["objects"]] * args.train_batch_size
-                    condition_latents = list(torch.unbind(batch["objects"], dim=1))
-                    if random.random() < 0.8:
-                        hidden_idx = [0]
-                elif "cloth" in batch:
-                    prompts = batch["text"]
-                    latent_image = encode_images(
-                        pixels=batch["image"], vae=vae, weight_dtype=weight_dtype
-                    )
-                    condition_types = [["tryon"]] * args.train_batch_size
-                    condition_latents = list(torch.unbind(batch["cloth"], dim=1))
-                    if random.random() < 0.2:
-                        condition_latents = [batch["openpose_img"]] + condition_latents
-                        for i, prompt in enumerate(prompts):
-                            prompts[i] += " Using the pose of the first image."
-                    else:
-                        condition_latents = [batch["model"]] + condition_latents
-                        if random.random() < 0.8:
-                            hidden_idx = [0]
-                        # if random.random() < 0.3:
-                        #     cond_num += 1
-                        #     condition_latents.append(batch["openpose_img"])
-                        #     for i, prompt in enumerate(prompts):
-                        #         prompts[i] += " Using the pose of the third image."
-                elif "target_face" in batch:
-                    prompts = batch["text"]
-                    latent_image = encode_images(
-                        pixels=batch["image"], vae=vae, weight_dtype=weight_dtype
-                    )
-                    condition_types = [["swapface"]] * args.train_batch_size
-                    condition_latents = [batch["target_face"], batch["source_face"]]
-                    if random.random() < 0.8:
-                        hidden_idx = [0]
-                elif "person" in batch:
-                    prompts = batch["prompt"]
-                    latent_image = encode_images(
-                        pixels=batch["image"], vae=vae, weight_dtype=weight_dtype
-                    )
-                    condition_types = [["person_object"]] * args.train_batch_size
-                    condition_latents = [batch["person"], batch["object"]]
-                    if random.random() < 0.2:
-                        hidden_idx = [0]
-                elif "relight_image" in batch:
-                    prompts = batch["prompt"]
-                    latent_image = encode_images(
-                        pixels=batch["relight_image"],
-                        vae=vae,
-                        weight_dtype=weight_dtype,
-                    )
-                    condition_types = [["relight"]] * args.train_batch_size
-                    if "bg_img" in batch:
-                        condition_latents = [batch["ori_img"], batch["bg_img"]]
-                    else:
-                        condition_latents = [batch["ori_img"]]
-                    if random.random() < 0.8:
-                        hidden_idx = [0]
-                elif "style" in batch:
-                    # 1. style description and prompt (text only)
-                    # 2. style image reference and prompt
-                    condition_types = [["style"]] * args.train_batch_size
-                    text_only = False
-                    images = [batch["image"], batch["image2"]]
-                    prompts = [batch["prompt"], batch["prompt2"]]
-                    images_before = [batch["image_before"], batch["image2_before"]]
-                    style = batch["style"]
-                    index = random.choice([0, 1])
-                    prompts = prompts[index]
-                    latent_image = encode_images(
-                        pixels=images[index], vae=vae, weight_dtype=weight_dtype
-                    )
-                    if random.random() < 0.8:
-                        hidden_idx = [0]
-                    if random.random() < 0.1:
-                        condition_latents = [images[1 - index]]
-                        for i, prompt in enumerate(prompts):
-                            prompts[i] = "Using the style of this image, " + prompts[i]
-                    else:
-                        # if random.random() < 0.5:
-                        #     condition_latents = [images[1-index], images_before[index]]
-                        #     template = ["Make the second image adopt the style of the first image.",
-                        #                 "Transform the second image so that it matches the artistic style of the first image.",
-                        #                 "Apply the visual style of the first image to the second image.",
-                        #                 "Change the second image to look like it was created in the same style as the first image.",
-                        #                 "Render the second image in the style of the first image."]
-                        # else:
-                        condition_latents = [images_before[index], images[1 - index]]
-                        template = [
-                            "Make the first image adopt the style of the second image.",
-                            "Transform the first image so that it matches the artistic style of the second image.",
-                            "Apply the visual style of the second image to the first image.",
-                            "Change the first image to look like it was created in the same style as the second image.",
-                            "Render the first image in the style of the second image.",
-                        ]
-                        prompts = random.choices(template, k=len(prompts))
-                    # else:
-                    #     semantic_conds.append(
-                    #         siglip_image_encoder(images[1-index])
-                    #     )
                 else:
                     prompts = batch["descriptions"]
                     latent_image = encode_images(
@@ -961,18 +849,7 @@ def main(args):
                 condition_latents = None
                 cond_ids = None
             img_ids = torch.concat(img_ids, dim=-2)
-            if len(semantic_conds) > 0:
-                semantic_conds = torch.concat(semantic_conds, dim=1)
-            else:
-                semantic_conds = None
-                # semantic_conds = torch.empty(
-                #     (
-                #         prompt_embeds.shape[0],
-                #         0,
-                #         1152,
-                #     ),
-                #     device=accelerator.device,
-                # )
+
             with accelerator.accumulate(transformer):
                 # 8 Predict the noise residual
                 # print(condition_types)
@@ -988,7 +865,6 @@ def main(args):
                     encoder_hidden_states=prompt_embeds,
                     txt_ids=text_ids,
                     img_ids=img_ids,
-                    # cond_type_ids=cond_type_ids,
                     cond_ids=cond_ids,
                     vae_conds_len=vae_conds_len,
                     return_dict=False,
@@ -1148,120 +1024,12 @@ def main(args):
                                 torch_dtype=weight_dtype,
                             ).to(accelerator.device, dtype=weight_dtype)
                             vae_conds_len = []
-                            if "style" in first_eval_batch:
-                                prompt = first_eval_batch["prompt"]
-                                height = first_eval_batch["image2"].shape[2]
-                                width = first_eval_batch["image2"].shape[3]
-                                images = [
-                                    first_eval_batch["image"],
-                                    first_eval_batch["image2"],
-                                ]
-                                images_before = [
-                                    first_eval_batch["image_before"],
-                                    first_eval_batch["image2_before"],
-                                ]
-                                index = random.choice([0, 1])
-                                # if random.random() < 0.5:
-                                #     conds = [images[1-index], images_before[index]]
-                                #     template = ["Make the second image adopt the style of the first image.",
-                                #                 "Transform the second image so that it matches the artistic style of the first image.",
-                                #                 "Apply the visual style of the first image to the second image.",
-                                #                 "Change the second image to look like it was created in the same style as the first image.",
-                                #                 "Render the second image in the style of the first image."]
-                                # else:
-                                imgs = [images_before[index]]
-                                conds = [images[1 - index]]
-                                template = [
-                                    "Make the first image adopt the style of the second image.",
-                                    "Transform the first image so that it matches the artistic style of the second image.",
-                                    "Apply the visual style of the second image to the first image.",
-                                    "Change the first image to look like it was created in the same style as the second image.",
-                                    "Render the first image in the style of the second image.",
-                                ]
-                                prompt = random.choices(template, k=len(prompt))
-                                condition_types = [["style"]] * args.train_batch_size
-                            elif "face_image_tensor" in first_eval_batch:
-                                condition_types = [["face"]] * args.train_batch_size
-                                prompt = first_eval_batch["text"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                imgs = [
-                                    first_eval_batch["face_image_tensor"].to(
-                                        dtype=weight_dtype,
-                                        device=accelerator.device,
-                                    )
-                                ]
-                            elif "cloth" in first_eval_batch:
-                                prompt = first_eval_batch["text"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                condition_types = [["tryon"]] * args.train_batch_size
-                                # if random.random() < 0.5:
-                                #     conds.append(first_eval_batch["openpose_img"])
-                                #     for i, p in enumerate(prompt):
-                                #         prompt[i] = (
-                                #             p + " Using the pose of the third image."
-                                #         )
-                                # else:
-                                imgs = [first_eval_batch["model"]]
-                                conds += list(
-                                    torch.unbind(first_eval_batch["cloth"], dim=1)
-                                )
-                            elif "edited_img" in first_eval_batch:
+                            if "edited_img" in first_eval_batch:
                                 prompt = first_eval_batch["prompt"]
                                 height = first_eval_batch["edited_img"].shape[2]
                                 width = first_eval_batch["edited_img"].shape[3]
                                 condition_types = [[x] for x in first_eval_batch["task"]]
                                 imgs = [first_eval_batch["src_img"]]
-                            elif "persons" in first_eval_batch:
-                                prompt = first_eval_batch["text"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                condition_types = [["persons"]] * args.train_batch_size
-                                conds += list(
-                                    torch.unbind(first_eval_batch["persons"], dim=1)
-                                )
-                            elif "objects" in first_eval_batch:
-                                prompt = first_eval_batch["text"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                condition_types = [["objects"]] * args.train_batch_size
-                                conds += list(
-                                    torch.unbind(first_eval_batch["objects"], dim=1)
-                                )
-                            elif "target_face" in first_eval_batch:
-                                prompt = first_eval_batch["text"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                condition_types = [["swapface"]] * args.train_batch_size
-                                imgs = [first_eval_batch["target_face"]]
-                                conds = [first_eval_batch["source_face"]]
-                            elif "person" in first_eval_batch:
-                                prompt = first_eval_batch["prompt"]
-                                height = first_eval_batch["image"].shape[2]
-                                width = first_eval_batch["image"].shape[3]
-                                condition_types = [
-                                    ["person_object_ic"]
-                                ] * args.train_batch_size
-                                if random.random() < 0.8:
-                                    imgs = [first_eval_batch["person"]]
-                                    conds = [first_eval_batch["object"]]
-                                else:
-                                    condition_types = [
-                                        ["person_object_c"]
-                                    ] * args.train_batch_size
-                                    conds = [
-                                        first_eval_batch["person"],
-                                        first_eval_batch["object"],
-                                    ]
-                            elif "relight_image" in first_eval_batch:
-                                prompt = first_eval_batch["prompt"]
-                                height = first_eval_batch["relight_image"].shape[2]
-                                width = first_eval_batch["relight_image"].shape[3]
-                                condition_types = [["relight"]] * args.train_batch_size
-                                imgs = [first_eval_batch["ori_img"]]
-                                if "bg_img" in first_eval_batch:
-                                    conds = [first_eval_batch["bg_img"]]
                             else:
                                 prompt = first_eval_batch["descriptions"]
                                 item_only = False
@@ -1299,7 +1067,7 @@ def main(args):
                                 height=height,
                                 width=width,
                                 max_sequence_length=512,
-                                num_inference_steps=1,
+                                # num_inference_steps=1,
                             ).images
                             LoRAMoE.debug = False
                             if accelerator.is_main_process:
@@ -1461,7 +1229,7 @@ def main(args):
                                             p_img_resized = p_img.resize(
                                                 (new_width, base_height),
                                                 Image.Resampling.LANCZOS,
-                                            )  # 使用高质量的缩放算法
+                                            )
                                         else:
                                             p_img_resized = p_img
                                         if p_img.size[1] != base_height:
