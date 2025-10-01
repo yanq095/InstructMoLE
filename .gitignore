@@ -1,3 +1,5 @@
 *cache*
 wandb
 *.log
+output
+*.out

@@ -172,7 +172,7 @@ def parse_args(input_args=None):
     parser.add_argument(
         "--checkpointing_steps",
         type=int,
-        default=1000,
+        default=5000,
         help=(
             "Save a checkpoint of the training state every X updates. These checkpoints can be used both as final"
             " checkpoints in case they are better than the last checkpoint, and are also suitable for resuming"
@@ -956,7 +956,8 @@ def main(args):
                 save_path = os.path.join(
                         args.work_dir, f"checkpoint-{global_step}"
                     )
-                if accelerator.is_main_process:
+                # if accelerator.is_main_process:
+                if True:
                     os.makedirs(save_path, exist_ok=True)
                     if (
                         accelerator.unwrap_model(
@@ -1110,299 +1111,7 @@ def main(args):
                                                 token_affinity_data_collector[name].scatter_add_(0, indices, weights.float())
                 
                             res = []
-                            if "style" in first_eval_batch:
-                                pil = image_processor.postprocess(
-                                    images[index],
-                                    output_type="pil",
-                                )
-                                style = image_processor.postprocess(
-                                    images[1 - index],
-                                    output_type="pil",
-                                )
-                                cond = image_processor.postprocess(
-                                    images_before[index],
-                                    output_type="pil",
-                                )
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = pil[i].size
-                                    concat_image = Image.new("RGB", (width * 4, height))
-                                    concat_image.paste(pil[i], (0, 0))
-                                    concat_image.paste(style[i], (width, 0))
-                                    concat_image.paste(cond[i], (width * 2, 0))
-                                    concat_image.paste(
-                                        gen_img.resize((width, height)), (width * 3, 0)
-                                    )
-                                    res.append(concat_image)
-                            elif "persons" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                persons = []
-                                for c in list(
-                                    torch.unbind(first_eval_batch["persons"], dim=1)
-                                ):
-                                    persons.append(
-                                        image_processor.postprocess(c, output_type="pil")
-                                    )
-                                cnt = 2 + len(persons)
-                                condition_types = [
-                                    [f"persons{len(persons)}"]
-                                ] * args.train_batch_size
-                                for i, gen_img in enumerate(generated_images):
-                                    base_width, base_height = gt[i].size
-                                    total_width = base_width * cnt
-                                    concat_image = Image.new(
-                                        "RGB", (total_width, base_height)
-                                    )
-                                    concat_image.paste(gt[i], (0, 0))
-                                    x_offset = base_width
-                                    for j, p in enumerate(persons):
-                                        p_img = p[i]
-                                        if p_img.size[1] != base_height:
-                                            aspect_ratio = p_img.size[0] / p_img.size[1]
-                                            new_width = int(base_height * aspect_ratio)
-                                            p_img_resized = p_img.resize(
-                                                (new_width, base_height),
-                                                Image.Resampling.LANCZOS,
-                                            )
-                                        else:
-                                            p_img_resized = p_img
-                                        if p_img.size[1] != base_height:
-                                            aspect_ratio = p_img.size[0] / p_img.size[1]
-                                            new_width = int(base_height * aspect_ratio)
-                                            p_img_resized = p_img.resize(
-                                                (new_width, base_height),
-                                                Image.Resampling.LANCZOS,
-                                            )
-                                        else:
-                                            p_img_resized = p_img
-                                       
-                                        person_canvas = Image.new(
-                                            "RGB", (base_width, base_height), color="black"
-                                        )  
-                                        paste_x = (base_width - p_img_resized.size[0]) // 2
-                                        paste_y = (base_height - p_img_resized.size[1]) // 2
-                                        person_canvas.paste(
-                                            p_img_resized, (paste_x, paste_y)
-                                        )
-                                        concat_image.paste(person_canvas, (x_offset, 0))
-                                        x_offset += base_width  
-                                    gen_img_resized = gen_img.resize(
-                                        (base_width, base_height), Image.Resampling.LANCZOS
-                                    )
-                                    concat_image.paste(
-                                        gen_img_resized, (x_offset, 0)
-                                    )  
-                                    res.append(concat_image)
-                            elif "objects" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                persons = []
-                                for c in list(
-                                    torch.unbind(first_eval_batch["objects"], dim=1)
-                                ):
-                                    persons.append(
-                                        image_processor.postprocess(c, output_type="pil")
-                                    )
-                                cnt = 2 + len(persons)
-                                condition_types = [
-                                    [f"objects{len(persons)}"]
-                                ] * args.train_batch_size
-                                for i, gen_img in enumerate(generated_images):
-                                    base_width, base_height = gt[i].size
-                                    total_width = base_width * cnt
-                                    concat_image = Image.new(
-                                        "RGB", (total_width, base_height)
-                                    )
-                                    concat_image.paste(gt[i], (0, 0))
-                                    x_offset = base_width
-                                    for j, p in enumerate(persons):
-                                        p_img = p[i]
-                                        if p_img.size[1] != base_height:
-                                            aspect_ratio = p_img.size[0] / p_img.size[1]
-                                            new_width = int(base_height * aspect_ratio)
-                                            p_img_resized = p_img.resize(
-                                                (new_width, base_height),
-                                                Image.Resampling.LANCZOS,
-                                            )
-                                        else:
-                                            p_img_resized = p_img
-                                        if p_img.size[1] != base_height:
-                                            aspect_ratio = p_img.size[0] / p_img.size[1]
-                                            new_width = int(base_height * aspect_ratio)
-                                            p_img_resized = p_img.resize(
-                                                (new_width, base_height),
-                                                Image.Resampling.LANCZOS,
-                                            )
-                                        else:
-                                            p_img_resized = p_img
-                                        person_canvas = Image.new(
-                                            "RGB", (base_width, base_height), color="black"
-                                        ) 
-                                        paste_x = (base_width - p_img_resized.size[0]) // 2
-                                        paste_y = (base_height - p_img_resized.size[1]) // 2
-                                        person_canvas.paste(
-                                            p_img_resized, (paste_x, paste_y)
-                                        )
-                                        concat_image.paste(person_canvas, (x_offset, 0))
-                                        x_offset += base_width  
-                                    gen_img_resized = gen_img.resize(
-                                        (base_width, base_height), Image.Resampling.LANCZOS
-                                    )
-                                    concat_image.paste(
-                                        gen_img_resized, (x_offset, 0)
-                                    )  
-                                    res.append(concat_image)
-                            elif "cloth" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                pose = image_processor.postprocess(
-                                    first_eval_batch["openpose_img"],
-                                    output_type="pil",
-                                )
-
-                                model = image_processor.postprocess(
-                                    first_eval_batch["model"],
-                                    output_type="pil",
-                                )
-                                cloths = []
-                                for c in list(
-                                    torch.unbind(first_eval_batch["cloth"], dim=1)
-                                ):
-                                    cloths.append(
-                                        image_processor.postprocess(c, output_type="pil")
-                                    )
-                                cnt = 4 + len(cloths)
-                                condition_types = [
-                                    [f"tryon{len(cloths)}"]
-                                ] * args.train_batch_size
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = gt[i].size
-                                    concat_image = Image.new("RGB", (width * cnt, height))
-                                    concat_image.paste(gt[i], (0, 0))
-                                    concat_image.paste(model[i], (width, 0))
-                                    concat_image.paste(pose[i], (width * 2, 0))
-                                    for j, cloth in enumerate(cloths):
-                                        concat_image.paste(
-                                            cloth[i].resize((width, width)),
-                                            (width * (3 + j), 0),
-                                        )
-                                    concat_image.paste(
-                                        gen_img.resize((width, height)),
-                                        (width * (4 + j), 0),
-                                    )
-                                    res.append(concat_image)
-                            elif "target_face" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                tar = image_processor.postprocess(
-                                    first_eval_batch["target_face"],
-                                    output_type="pil",
-                                )
-                                source = image_processor.postprocess(
-                                    first_eval_batch["source_face"],
-                                    output_type="pil",
-                                )
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = gt[i].size
-                                    concat_image = Image.new("RGB", (width * 4, height))
-                                    concat_image.paste(gt[i], (0, 0))
-                                    concat_image.paste(tar[i], (width, 0))
-                                    concat_image.paste(source[i], (width * 2, 0))
-                                    concat_image.paste(
-                                        gen_img.resize((width, height)), (width * 3, 0)
-                                    )
-                                    res.append(concat_image)
-                            elif "person" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                person = image_processor.postprocess(
-                                    first_eval_batch["person"],
-                                    output_type="pil",
-                                )
-                                obj = image_processor.postprocess(
-                                    first_eval_batch["object"],
-                                    output_type="pil",
-                                )
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = gt[i].size
-                                    concat_image = Image.new("RGB", (width * 4, height))
-                                    concat_image.paste(gt[i], (0, 0))
-                                    concat_image.paste(person[i], (width, 0))
-                                    concat_image.paste(obj[i], (width * 2, 0))
-                                    concat_image.paste(
-                                        gen_img.resize((width, height)), (width * 3, 0)
-                                    )
-                                    res.append(concat_image)
-                            elif "relight_image" in first_eval_batch:
-                                res = []
-                                img = image_processor.postprocess(
-                                    first_eval_batch["relight_image"],
-                                    output_type="pil",
-                                )
-                                ori_img = image_processor.postprocess(
-                                    first_eval_batch["ori_img"],
-                                    output_type="pil",
-                                )
-                                bg_img = None
-                                if "bg_img" in first_eval_batch:
-                                    bg_img = image_processor.postprocess(
-                                        first_eval_batch["bg_img"],
-                                        output_type="pil",
-                                    )
-
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = img[i].size
-                                    if bg_img is not None:
-                                        concat_image = Image.new("RGB", (width * 4, height))
-                                    else:
-                                        concat_image = Image.new("RGB", (width * 3, height))
-                                    concat_image.paste(img[i], (0, 0))
-                                    concat_image.paste(ori_img[i], (width, 0))
-                                    if bg_img is not None:
-                                        concat_image.paste(bg_img[i], (width * 2, 0))
-                                        concat_image.paste(
-                                            gen_img.resize((width, height)), (width * 3, 0)
-                                        )
-                                    else:
-                                        concat_image.paste(
-                                            gen_img.resize((width, height)), (width * 2, 0)
-                                        )
-                                    res.append(concat_image)
-                            elif "face_image_tensor" in first_eval_batch:
-                                res = []
-                                gt = image_processor.postprocess(
-                                    first_eval_batch["image"],
-                                    output_type="pil",
-                                )
-                                cond = image_processor.postprocess(
-                                    first_eval_batch["face_image_tensor"],
-                                    output_type="pil",
-                                )
-                                for i, gen_img in enumerate(generated_images):
-                                    width, height = gt[i].size
-                                    concat_image = Image.new("RGB", (width * 3, height))
-                                    concat_image.paste(gt[i], (0, 0))
-                                    concat_image.paste(cond[i], (width, 0))
-                                    concat_image.paste(
-                                        gen_img.resize((width, height)), (width * 2, 0)
-                                    )
-                                    res.append(concat_image)
-                            elif "edited_img" in first_eval_batch:
+                            if "edited_img" in first_eval_batch:
                                 res = []
                                 gt = image_processor.postprocess(
                                     first_eval_batch["edited_img"],
@@ -1513,7 +1222,7 @@ def main(args):
                                 plt.close(fig)
                             except ImportError:
                                 logger.warning("matplotlib/seaborn not found. Skipping heatmap.")
-                accelerator.wait_for_everyone()
+            accelerator.wait_for_everyone()
             
             if global_step >= args.max_train_steps:
                 break
